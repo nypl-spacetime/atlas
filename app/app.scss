@@ -1,0 +1,57 @@
+#app {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+header {
+  height: 35px;
+  background-color: #209f98;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+header h1 {
+  display: inline;
+  font-size: 20px;
+  margin-right: 1em;
+}
+
+section {
+  position: absolute;
+  top: 35px;
+  bottom: 0;
+}
+
+.map-container {
+  left: 0;
+  right: 500px;
+}
+
+.sidebar-container {
+  position: absolute;
+  right: 0;
+  width: 500px;
+  overflow-y: auto;
+}
+
+.svg-overlay {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.svg-overlay svg {
+  width: 100%;
+  height: 100%;
+}
+
+.svg-overlay svg line {
+  stroke: rgb(255, 0, 0);
+  stroke-width: 1;
+  stroke-dasharray: 5, 5;
+}

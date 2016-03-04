@@ -1,0 +1,4 @@
+port: 3003
+
+api:
+  url: http://localhost:3001/

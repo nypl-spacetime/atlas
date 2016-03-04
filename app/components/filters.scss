@@ -1,0 +1,67 @@
+.filters ol {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.filters ol li {
+  display: inline;
+}
+
+.hond {
+  opacity: 0.3;
+}
+
+.horizontal-slider {
+  width: 100%;
+  height: 30px;
+  border: 1px solid grey;
+}
+
+       .handle {
+           font-size: 0.9em;
+           text-align: center;
+           background-color: black;
+           color: white;
+           cursor: pointer;
+       }
+       .handle.active {
+           background-color: grey;
+       }
+       .bar {
+           position: relative;
+           background: #ddd;
+       }
+       .bar.bar-1 {
+           background: #f00;
+       }
+       .bar.bar-2 {
+           background: #0f0;
+       }
+       .horizontal-slider .bar {
+           top: 20px;
+           height: 10px;
+       }
+       .horizontal-slider .handle {
+           top: 1px;
+           width: 20px;
+           height: 20px;
+           line-height: 20px;
+       }
+       .vertical-slider .handle {
+           left: 1px;
+           width: 20px;
+           line-height: 50px;
+       }
+       .vertical-slider .bar {
+           left: 20px;
+           width: 10px;
+       }
+       #horizontal-0,
+       #horizontal-1, #horizontal-2, #horizontal-3,
+       #vertical {
+           margin: 20px 10px;
+       }
+       #horizontal-2 .bar.bar-2 {
+           background: #ddd;
+       }
