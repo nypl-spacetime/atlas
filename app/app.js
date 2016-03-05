@@ -54,7 +54,7 @@ const App = React.createClass({
       <div id='app'>
         <header>
           <h1>🚀 Space/Time Directory - Atlas</h1>
-          <span>All Space/Time Directory objects on a map!</span>
+          <span>All Space/Time Directory objects on a map! <b>Experimental viewer for experimental data! Very experimental!</b></span>
         </header>
         <section className='map-container'>
           <Map ref='map' pits={this.state.pits} updateFilters={this.mapUpdateFilters} updateOverlay={this.updateOverlay}
