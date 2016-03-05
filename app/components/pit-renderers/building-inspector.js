@@ -10,14 +10,26 @@ const Renderer = React.createClass({
 
   render: function() {
     var livedIn = 'on this address'
-    if (this.props.feature.properties.type === 'hg:Building') {
+    var isBuilding = this.props.feature.properties.type === 'hg:Building'
+    if (isBuilding) {
       livedIn = 'in this building'
+    }
+
+    var link
+    if (isBuilding) {
+      link = <span>
+        <a href='javascript:;' onClick={this.findMap}>Show Building Inspector map</a>, or find
+        out <a href='javascript:;' onClick={this.findPeople}>who lived {livedIn}</a>?
+      </span>
+    } else {
+      link = <span>
+        Find out <a href='javascript:;' onClick={this.findPeople}>who lived {livedIn}</a>?
+      </span>
     }
 
     return (
       <div>
-        <a href='javascript:;' onClick={this.findMap}>Show Building Inspector map</a>, or find
-        out <a href='javascript:;' onClick={this.findPeople}>who lived {livedIn}</a>?
+        {link}
         <ul>
           {this.state.people.map(function(person, i) {
             var name = `${person.firstName} ${person.lastName}`.trim()
@@ -32,10 +44,8 @@ const Renderer = React.createClass({
 
   findPeople: function(e) {
     e.preventDefault();
-
     var buildingId = this.props.feature.properties.id
-    // buildingId = 'building-inspector/polygon-84529'
-    fetch(this.props.api.url + `hond?id=${buildingId}`)
+    fetch(this.props.api.url + `persons-in-pit?id=${buildingId}`)
       .then(response => {
         return response.json();
       }).then(json => {
@@ -51,12 +61,12 @@ const Renderer = React.createClass({
     e.preventDefault();
 
     var sheetId = this.props.feature.properties.data.sheetId
-    fetch(this.props.api.url + `vis`)
+    fetch(this.props.api.url + `building-inspect-sheets`)
       .then(response => {
         return response.json();
       }).then(json => {
         var sheets = json.features.filter((f) => f.properties.id === sheetId)
-        if (sheets) {
+        if (sheets.length) {
           var sheet = sheets[0]
           var mapId = sheet.properties.map_id
           this.props.modifyMap({
