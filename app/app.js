@@ -22,43 +22,52 @@ const App = React.createClass({
         type: 'FeatureCollection',
         features: []
       },
+      showOverlayLines: false,
       overlayLines: [
         [
           [0, 0],
-          [200, 200]
+          [0, 0]
         ],
         [
           [0, 0],
-          [200, 200]
+          [0, 0]
         ]
       ]
     };
   },
 
   render: function() {
+    var svg
+
+    if (this.state.showOverlayLines) {
+      svg = (
+        <svg>
+          <line x1={this.state.overlayLines[0][0][0]} y1={this.state.overlayLines[0][0][1]}
+            x2={this.state.overlayLines[0][1][0]} y2={this.state.overlayLines[0][1][1]} />
+          <line x1={this.state.overlayLines[1][0][0]} y1={this.state.overlayLines[1][0][1]}
+            x2={this.state.overlayLines[1][1][0]} y2={this.state.overlayLines[1][1][1]} />
+        </svg>
+      )
+    }
+
     return (
       <div id='app'>
         <header>
-          <h1>Space/Time Directory - Atlas</h1>
-          <span>Atlas shows the first 100 results from NYPL Labs Space/Time Directory of which the geometry fits completely in the bounding box of the map</span>
+          <h1>🚀 Space/Time Directory - Atlas</h1>
+          <span>All Space/Time Directory objects on a map!</span>
         </header>
         <section className='map-container'>
           <Map ref='map' pits={this.state.pits} updateFilters={this.mapUpdateFilters} updateOverlay={this.updateOverlay}
-            api={this.props.api} options={this.state.map} modifySidebar={this.modifySidebar} />
+            hideOverlay={this.hideOverlay} api={this.props.api} options={this.state.map} modifySidebar={this.modifySidebar} />
         </section>
         <section className='sidebar-container'>
           <Sidebar ref='sidebar' pits={this.state.pits} updateFilters={this.sidebarUpdateFilters}
             updateFilters={this.updateFilters} api={this.props.api} updateOverlay={this.updateOverlay}
-            options={this.state.sidebar} modifyMap={this.modifyMap} />
+            hideOverlay={this.hideOverlay} options={this.state.sidebar} modifyMap={this.modifyMap} />
         </section>
 
         <div className='svg-overlay'>
-          <svg>
-            <line x1={this.state.overlayLines[0][0][0]} y1={this.state.overlayLines[0][0][1]}
-              x2={this.state.overlayLines[0][1][0]} y2={this.state.overlayLines[0][1][1]} />
-            <line x1={this.state.overlayLines[1][0][0]} y1={this.state.overlayLines[1][0][1]}
-              x2={this.state.overlayLines[1][1][0]} y2={this.state.overlayLines[1][1][1]} />
-          </svg>
+          {svg}
         </div>
 
       </div>
@@ -75,13 +84,21 @@ const App = React.createClass({
       filterUrlParts.push('contains=' + filters.contains.join(','))
     }
 
+    if (filters.name) {
+      filterUrlParts.push('name=' + filters.name)
+    }
+
     if (filters.type) {
       filterUrlParts.push('type=' + filters.type.join(','))
     }
 
     if (filters.years) {
-      filterUrlParts.push('before=' + filters.years[1])
-      filterUrlParts.push('after=' + filters.years[0])
+      if (filters.years[1]) {
+        filterUrlParts.push('before=' + filters.years[1])
+      }
+      if (filters.years[0]) {
+        filterUrlParts.push('after=' + filters.years[0])
+      }
     }
 
     var filterUrl
@@ -90,37 +107,24 @@ const App = React.createClass({
       filterUrl = '?' + filterUrlParts.join('&')
     }
 
-    console.log(this.props)
-    console.log(this.dispatch)
-    // this.props.onDoeHet({
-    //   type: 'FeatureCollection',
-    //   features: [
-    //     {
-    //       type: 'Feature',
-    //       properties: {
-    //         matt: 'nee'
-    //       },
-    //       geometry: {
-    //         type: 'Point',
-    //         coordinates: [73, -43]
-    //       }
-    //     }
-    //   ]
-    // })
-
-
-
     fetch(this.props.api.url + 'search' + filterUrl)
       .then(response => {
         return response.json();
       }).then(json => {
         this.setState({
+          showOverlayLines: false,
         //   filters: filters,
           pits: json
         });
       }).catch(err => {
         console.error(err);
       });
+  },
+
+  hideOverlay: function() {
+    this.setState({
+      showOverlayLines: false
+    })
   },
 
   updateOverlay: function(id, from, to) {
@@ -140,6 +144,7 @@ const App = React.createClass({
     }
 
     this.setState({
+      showOverlayLines: true,
       overlayLines: overlayLines
     })
   },

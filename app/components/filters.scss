@@ -1,3 +1,7 @@
+.filters {
+  margin-bottom: 1em;
+}
+
 .filters ol {
   list-style-type: none;
   margin: 0;
@@ -8,60 +12,66 @@
   display: inline;
 }
 
-.hond {
+.filters .filter {
+  margin-left: 5px;
+  width: calc(100% - 5px);
+  box-sizing: border-box;
+}
+
+.filters button {
+  border-radius: 4px;
+  background-color: #ffcf03;
+  margin: 2px;
+  padding: 3px;
+  border: solid #6409A6 2px;
+  text-decoration: none;
+}
+
+.filters button.inactive {
   opacity: 0.3;
 }
 
-.horizontal-slider {
-  width: 100%;
-  height: 30px;
-  border: 1px solid grey;
+.year-slider {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
-       .handle {
-           font-size: 0.9em;
-           text-align: center;
-           background-color: black;
-           color: white;
-           cursor: pointer;
-       }
-       .handle.active {
-           background-color: grey;
-       }
-       .bar {
-           position: relative;
-           background: #ddd;
-       }
-       .bar.bar-1 {
-           background: #f00;
-       }
-       .bar.bar-2 {
-           background: #0f0;
-       }
-       .horizontal-slider .bar {
-           top: 20px;
-           height: 10px;
-       }
-       .horizontal-slider .handle {
-           top: 1px;
-           width: 20px;
-           height: 20px;
-           line-height: 20px;
-       }
-       .vertical-slider .handle {
-           left: 1px;
-           width: 20px;
-           line-height: 50px;
-       }
-       .vertical-slider .bar {
-           left: 20px;
-           width: 10px;
-       }
-       #horizontal-0,
-       #horizontal-1, #horizontal-2, #horizontal-3,
-       #vertical {
-           margin: 20px 10px;
-       }
-       #horizontal-2 .bar.bar-2 {
-           background: #ddd;
-       }
+.year-slider span {
+  width: 40px;
+  position: relative;
+}
+
+.horizontal-slider {
+  margin-left: 5px;
+  margin-right: 5px;
+  position: relative;
+  display: inline-block;
+  width: 370px;
+  height: 26px;
+  border: 2px solid #6409A6;
+  border-radius: 4px;
+}
+
+.handle {
+  background-color: #6409A6;
+  cursor: pointer;
+}
+
+.handle.active {
+   opacity: 0.7;
+}
+
+.horizontal-slider .handle {
+  width: 26px;
+  height: 26px;
+  line-height: 20px;
+}
+
+input {
+  background-color: #ffcf03;
+  border: 2px solid #6409A6;
+  border-radius: 4px;
+  height: 26px;
+  padding: 3px;
+}

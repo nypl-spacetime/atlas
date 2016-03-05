@@ -7,6 +7,10 @@ const Filters = React.createClass({
 
   getInitialState: function() {
     return {
+      yearBounds: [
+        1500,
+        new Date().getFullYear()
+      ],
       type: {
         'hg:Address': true,
         'hg:Building': true,
@@ -16,13 +20,13 @@ const Filters = React.createClass({
         'hg:Ward': true,
         // 'hg:State': true,
         'hg:Place': true,
-        'hg:Municipality': true,
-        'hg:Region': true,
-        'hg:Water': true,
+        // 'hg:Municipality': true,
+        // 'hg:Region': true,
+        // 'hg:Water': true,
         'hg:County': true,
         // 'hg:Province': true,
         // 'hg:Country': true,
-        'hg:Area': true,
+        // 'hg:Area': true,
         // 'st:Person': true,
         // 'st:Company': true,
         'st:Photo': true,
@@ -32,32 +36,73 @@ const Filters = React.createClass({
   },
 
   render: function() {
-    var minYear = 1500
-    var currentYear = new Date().getFullYear()
+
+    var years = [
+      this.state.yearBounds[0],
+      this.state.yearBounds[1]
+    ]
+    if (this.refs.yearSlider) {
+      years = this.refs.yearSlider.getValue()
+    }
 
     return (
       <div className='filters'>
-        <ol>
-          {Object.keys(this.state.type).map((type) => {
-            var filtered = this.state.type[type]
+        <div>
+          <h3>Types:</h3>
+          <ol className='filter'>
+            {Object.keys(this.state.type).map((type) => {
+              var filtered = this.state.type[type]
 
-            return (
-              <li key={type}>
-                <button className={filtered ? '' : 'hond'} onClick={this.toggleType.bind(this, type)}>
-                  {type.split(':')[1]}
-                </button>
-              </li>
-            )
-          })}
-        </ol>
-        <ReactSlider className='horizontal-slider' defaultValue={[minYear, currentYear]}
-          ref='yearSlider' min={minYear} max={currentYear} pearling onAfterChange={this.changeYears} />
+              return (
+                <li key={type}>
+                  <button className={filtered ? '' : 'inactive'} onClick={this.toggleType.bind(this, type)}>
+                    {type.split(':')[1]}
+                  </button>
+                </li>
+              )
+            })}
+          </ol>
+        </div>
+        <div>
+          <h3>Year:</h3>
+          <div className='year-slider filter'>
+            <span>{years[0]}</span>
+            <ReactSlider className='horizontal-slider' defaultValue={this.state.yearBounds.slice()} onChange={this.changingYears}
+              ref='yearSlider' min={this.state.yearBounds[0]} max={this.state.yearBounds[1]} pearling onAfterChange={this.changeYears} />
+            <span>{years[1]}</span>
+          </div>
+
+        </div>
+        <div>
+          <h3>Name:</h3>
+          <input ref='name' className='filter' onChange={this.changeName}></input>
+        </div>
       </div>
     );
   },
 
+  changeName: function() {
+    var name = this.refs.name.value
+    this.props.updateFilters({
+      name: name
+    })
+  },
+
+  changingYears: function() {
+    this.forceUpdate()
+  },
+
   changeYears: function() {
-    var years = this.refs.yearSlider.getValue()
+    var years = this.refs.yearSlider.getValue().slice()
+
+    if (years[0] === this.state.yearBounds[0]) {
+      years[0] = null
+    }
+
+    if (years[1] === this.state.yearBounds[1]) {
+      years[1] = null
+    }
+
     this.props.updateFilters({
       years: years
     })

@@ -9,10 +9,15 @@ const Renderer = React.createClass({
   },
 
   render: function() {
+    var livedIn = 'on this address'
+    if (this.props.feature.properties.type === 'hg:Building') {
+      livedIn = 'in this building'
+    }
+
     return (
       <div>
-        <a href='javascript:;' onClick={this.findMap}>Show map</a>, or find
-        out <a href='javascript:;' onClick={this.findPeople}>who lived in this building</a>?
+        <a href='javascript:;' onClick={this.findMap}>Show Building Inspector map</a>, or find
+        out <a href='javascript:;' onClick={this.findPeople}>who lived {livedIn}</a>?
         <ul>
           {this.state.people.map(function(person, i) {
             var name = `${person.firstName} ${person.lastName}`.trim()

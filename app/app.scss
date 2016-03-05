@@ -6,8 +6,9 @@
 }
 
 header {
-  height: 35px;
-  background-color: #209f98;
+  height: 38px;
+  background-color: #6409A6;
+  color: white;
   padding: 5px;
   box-sizing: border-box;
 }
@@ -20,7 +21,7 @@ header h1 {
 
 section {
   position: absolute;
-  top: 35px;
+  top: 38px;
   bottom: 0;
 }
 
@@ -34,6 +35,7 @@ section {
   right: 0;
   width: 500px;
   overflow-y: auto;
+  background-color: #ffcf03;
 }
 
 .svg-overlay {
@@ -46,12 +48,13 @@ section {
 }
 
 .svg-overlay svg {
+  position: absolute;
   width: 100%;
   height: 100%;
 }
 
 .svg-overlay svg line {
-  stroke: rgb(255, 0, 0);
+  stroke: #ffcf03;
   stroke-width: 1;
   stroke-dasharray: 5, 5;
 }

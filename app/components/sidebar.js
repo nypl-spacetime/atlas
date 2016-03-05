@@ -14,14 +14,19 @@ const Sidebar = React.createClass({
   render: function() {
     return (
       <div className='sidebar'>
-        <Filters pits={this.props.pits} filters={this.props.filters} updateFilters={this.props.updateFilters}/>
-        <ul>
-          { this.props.pits.features.map((feature) => {
-            var key = feature.properties.uri || feature.properties.id
-            return <Pit key={key} feature={feature} api={this.props.api}
-              updateOverlay={this.props.updateOverlay} modifyMap={this.props.modifyMap}/>
-          })}
-        </ul>
+        <div>
+          <Filters pits={this.props.pits} filters={this.props.filters} updateFilters={this.props.updateFilters}/>
+        </div>
+        <div>
+          <h3>Results:</h3>
+          <ul>
+            { this.props.pits.features.map((feature) => {
+              var key = feature.properties.uri || feature.properties.id
+              return <Pit key={key} feature={feature} api={this.props.api} hideOverlay={this.props.hideOverlay}
+                updateOverlay={this.props.updateOverlay} modifyMap={this.props.modifyMap}/>
+            })}
+          </ul>
+        </div>
       </div>
     );
   }

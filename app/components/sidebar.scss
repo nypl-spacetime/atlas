@@ -1,5 +1,6 @@
 .sidebar {
   padding: 8px;
+  box-sizing: border-box;
 }
 
 .sidebar ul {
@@ -8,13 +9,8 @@
   list-style-type: none;
 }
 
-.sidebar ul li {
-  margin: 5px;
-}
-
-h2 {
-  margin: 0;
+h3 {
+  margin-top: 0;
+  margin-bottom: 2px;
   font-size: 16px;
-  border-top-style: solid;
-  border-top-width: 1px;
 }

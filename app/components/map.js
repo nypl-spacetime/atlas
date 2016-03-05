@@ -29,13 +29,13 @@ const Map = React.createClass({
 
     L.Icon.Default.imagePath = './';
 
-    var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+    var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
     }).addTo(map);
 
     map.on('moveend', this.moveEnd);
 
-    var color = '#f62'
+    var color = '#ffcf03'
 
     var geojsonMarkerOptions = {
       radius: 4,
@@ -69,7 +69,10 @@ const Map = React.createClass({
     this.setState({
       map: map,
       geoJsonLayer: geoJsonLayer
-    });
+    })
+
+    // Fire map move event, 500ms later (make sure state is set)
+    setTimeout(this.moveEnd, 500)
   },
 
   getOverlayLinesFromId: function(id) {
