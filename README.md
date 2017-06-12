@@ -1,5 +1,5 @@
-# NYPL Labs Atlas
+# NYC Space/Time Directory - Atlas
 
-All Space/Time Directory objects on a map!
+Search interface for [NYC Space/Time Directory](http://spacetime.nypl.org) data.
 
 __MORE SOON!__
