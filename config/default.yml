@@ -1,4 +1,56 @@
-port: 3003
-
 api:
-  url: http://localhost:3001/
+  # url: http://spacetime-api.localhost/
+  url: https://fpr9gjsw3c.execute-api.us-east-1.amazonaws.com/dev/
+
+longTitleLength: 120
+
+cssVariables:
+  padding: 5px
+  headerHeight: 56px
+  mobileWidth: 900px
+
+  colors:
+    main: '#ff3e1f'
+    red: rgb(208, 52, 58)
+    green: rgb(100, 128, 3)
+    blue: rgb(2, 104, 202)
+    gray: rgb(110, 110, 110)
+
+  outlineColor: '#d0343a'
+  outlineOpacity: 0.5
+  outlineWidth: 3px
+
+  imageBackground: rgb(50, 50, 50)
+
+  pageBackground: '#fefefe'
+  pageColor: '#333'
+
+  headerBackground: '#ff3e1f'
+  headerColor: white
+
+steps:
+  - location
+  - bearingintroduction
+  - bearing
+  - thanks
+
+defaults:
+  map:
+    mapbox:
+      username: nypllabs
+      styleId: cj2gmix25005o2rpapartqm07
+      accessToken: pk.eyJ1IjoibnlwbGxhYnMiLCJhIjoiSFVmbFM0YyJ9.sl0CRaO71he1XMf_362FZQ
+    # tileUrl: 'https://api.mapbox.com/styles/v1/nypllabs/cj2gmix25005o2rpapartqm07/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibnlwbGxhYnMiLCJhIjoiSFVmbFM0YyJ9.sl0CRaO71he1XMf_362FZQ'
+    # attribution: '&copy; Mapbox, &copy; OpenStreetMap'
+
+    tileUrl: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>'
+
+    # scrollWheelZoom: false
+    scrollWheelZoom: center
+    doubleClickZoom: center
+    center: [40.75319, -73.98224]
+    zoom: 13
+    minZoom: 6
+    maxZoom: 18
+    keyboardPanDelta: 40
